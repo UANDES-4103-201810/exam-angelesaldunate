@@ -1,0 +1,32 @@
+<%= form_with(model: delivery_info, local: true) do |form| %>
+  <% if delivery_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(delivery_info.errors.count, "error") %> prohibited this delivery_info from being saved:</h2>
+
+      <ul>
+      <% delivery_info.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adressinfo %>
+    <%= form.text_field :adressinfo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.number_field :phone %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
