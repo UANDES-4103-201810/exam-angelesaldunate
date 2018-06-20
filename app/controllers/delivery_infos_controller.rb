@@ -1,6 +1,7 @@
 class DeliveryInfosController < ApplicationController
   before_action :set_delivery_info, only: [:show, :edit, :update, :destroy]
 
+
   # GET /delivery_infos
   # GET /delivery_infos.json
   def index

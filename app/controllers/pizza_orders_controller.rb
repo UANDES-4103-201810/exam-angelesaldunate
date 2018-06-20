@@ -1,4 +1,6 @@
 class PizzaOrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   before_action :set_pizza_order, only: [:show, :edit, :update, :destroy]
 
   # GET /pizza_orders
