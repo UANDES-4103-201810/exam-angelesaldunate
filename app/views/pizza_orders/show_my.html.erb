@@ -1,13 +1,49 @@
 
-<p>
-  <strong>Pizza:</strong>
-  <%= @pizza_order.pizza %>
-</p>
+<h1>Your Order</h1>
 
-<p>
-  <strong>Order:</strong>
-  <%= @pizza_order.order %>
-</p>
+<table class="table">
+  <thead >
+  <tr>
+    <th scope="col">Pizza</th>
+    <th scope="col">Crust</th>
+    <th scope="col">Price</th>
 
-<%= link_to 'Edit', edit_pizza_order_path(@pizza_order) %> |
-<%= link_to 'Back', pizza_orders_path %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% total = 0 %>
+  <% @my_pizzas.each do |pizza| %>
+    <tr>
+      <td><%= pizza.recipe.name %></td>
+      <td><%= pizza.crust.name %></td>
+
+      <td><%= pizza.recipe.price + pizza.crust.price%></td>
+      <%total+=pizza.recipe.price + pizza.crust.price %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<h6>Total: $<%=total %></h6>
+<br>
+<br>
+
+<h5>Fill your Delivery Information</h5>
+<div class="form-group">
+
+<%= form_tag("/delivery_infos", method: "post") do %>
+  <p>   <%= label_tag(:address, "Adress") %></p>
+  <p><%= text_field_tag(:address) %></p>
+  <p><%= label_tag(:adressinfo, "Adress Info") %></p>
+  <p><%= text_field_tag(:adressinfo) %></p>
+  <p> <%= label_tag(:phone, "Phone") %></p>
+  <p><%= number_field_tag(:phone) %></p>
+
+
+
+  <p><%= submit_tag("Send it Home!") %></p>
+<% end %>
+</div>
+
+
+<br>

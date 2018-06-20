@@ -33,19 +33,9 @@
   <%= radio_button_tag(:crust_id, 2) %>
   <%= hidden_field_tag(:recipe_id, @recipe.id) %>
 
-  <%= submit_tag("Search") %>
+  <%= submit_tag("Add To Cart") %>
 <% end %>
-<div class="form-check-inline">
-  <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="optradio"> Regular $100
-  </label>
-</div>
-<div class="form-check-inline">
-  <label class="form-check-label">
-    <input type="radio" class="form-check-input" name="optradio"> Thin $200
-  </label>
-</div>
-<button type="button" class="btn btn-default">Default</button>
+
 
 <br>
 

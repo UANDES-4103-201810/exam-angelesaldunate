@@ -28,6 +28,7 @@ class DeliveryInfosController < ApplicationController
 
     respond_to do |format|
       if @delivery_info.save
+
         format.html { redirect_to @delivery_info, notice: 'Delivery info was successfully created.' }
         format.json { render :show, status: :created, location: @delivery_info }
       else
@@ -69,6 +70,6 @@ class DeliveryInfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_info_params
-      params.require(:delivery_info).permit(:address, :adressinfo, :phone)
+      params.permit(:address, :adressinfo, :phone)
     end
 end

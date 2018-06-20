@@ -20,6 +20,11 @@ class PizzaOrdersController < ApplicationController
   # GET /pizza_orders/1/edit
   def edit
   end
+  def show_my
+    @pizza_orders = CustomerOrder.find_by(customer_id: current_customer, active: true)
+    @my_pizzas = Order.find_by(id: @pizza_orders).pizzas
+
+  end
 
   # POST /pizza_orders
   # POST /pizza_orders.json
@@ -31,22 +36,26 @@ class PizzaOrdersController < ApplicationController
     custorder = CustomerOrder.find_by(customer_id: current_customer)
     if custorder==nil
       @order = Order.new
-      @custor = CustomerOrder.new
       @order.save
-      @custor.customer_id = current_customer
+      @custor = CustomerOrder.new
+      @custor.customer_id = current_customer.id
       @custor.order_id = @order.id
-      @active = true
+      @custor.active= true
+      @custor.save
+
 
 
     else
-      if CustomerOrder.find_by(customer_id: current_customer).where(active: true)
+      if CustomerOrder.find_by(customer_id: current_customer, active: false)
         @order = Order.new
         @custor = CustomerOrder.new
         @order.save
         @custor.customer_id = current_customer
         @custor.order_id = @order.id
-        @active = true
-
+        @custor.active= true
+        @custor.save
+      else
+        @order = CustomerOrder.find_by(customer_id: current_customer, active: true)
       end
 
     end
@@ -57,7 +66,7 @@ class PizzaOrdersController < ApplicationController
     @pizza_order.order_id = @order.id
     respond_to do |format|
       if @pizza_order.save
-        format.html { redirect_to @pizza_order, notice: 'Pizza order was successfully created.' }
+        format.html { redirect_to show_my_path, notice: 'Pizza order was successfully created.' }
         format.json { render :show, status: :created, location: @pizza_order }
       else
         format.html { render :new }

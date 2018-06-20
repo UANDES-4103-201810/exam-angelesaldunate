@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
         <% if customer_signed_in? %>
           <li class="nav-item">
-            <a class="nav-link" <%= link_to "Cart",  :class => 'navbar-link' %> </a>
+            <a class="nav-link" <%= link_to "Cart", show_my_path, :class => 'navbar-link' %> </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" <%= link_to current_customer.name, edit_customer_registration_path, :class => 'navbar-link' %> </a>
