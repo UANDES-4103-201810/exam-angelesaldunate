@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_194428) do
+ActiveRecord::Schema.define(version: 2018_06_20_215308) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,10 +34,20 @@ ActiveRecord::Schema.define(version: 2018_06_20_194428) do
   end
 
   create_table "crusts", force: :cascade do |t|
-    t.string "type"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "customer_orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active"
+    t.index ["customer_id"], name: "index_customer_orders_on_customer_id"
+    t.index ["order_id"], name: "index_customer_orders_on_order_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -74,13 +84,18 @@ ActiveRecord::Schema.define(version: 2018_06_20_194428) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "pizza_id"
     t.string "payment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["pizza_id"], name: "index_orders_on_pizza_id"
+  end
+
+  create_table "pizza_orders", force: :cascade do |t|
+    t.integer "pizza_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_pizza_orders_on_order_id"
+    t.index ["pizza_id"], name: "index_pizza_orders_on_pizza_id"
   end
 
   create_table "pizzas", force: :cascade do |t|
@@ -93,8 +108,8 @@ ActiveRecord::Schema.define(version: 2018_06_20_194428) do
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
-    t.integer "ingredient_id"
     t.integer "recipe_id"
+    t.integer "ingredient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
@@ -103,9 +118,9 @@ ActiveRecord::Schema.define(version: 2018_06_20_194428) do
 
   create_table "recipes", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price"
   end
 
 end

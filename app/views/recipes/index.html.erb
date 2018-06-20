@@ -1,0 +1,22 @@
+
+<h1>Menu</h1>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" >Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.name %></td>
+        <td><%= link_to 'Show me this pizza', show_unique_path(recipe) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

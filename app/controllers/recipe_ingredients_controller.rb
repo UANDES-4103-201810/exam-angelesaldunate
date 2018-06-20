@@ -10,6 +10,13 @@ class RecipeIngredientsController < ApplicationController
   # GET /recipe_ingredients/1
   # GET /recipe_ingredients/1.json
   def show
+
+  end
+  def show_unique
+
+    @recipe = Recipe.find_by(id: params[:format])
+    @ingredients = @recipe.ingredients
+
   end
 
   # GET /recipe_ingredients/new
@@ -69,6 +76,6 @@ class RecipeIngredientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipe_ingredient_params
-      params.require(:recipe_ingredient).permit(:ingredient_id, :recipe_id)
+      params.require(:recipe_ingredient).permit(:recipe_id, :ingredient_id)
     end
 end
